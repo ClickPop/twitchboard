@@ -30,7 +30,7 @@ app.get('/:channel_id/:referrer_id', async (req, res) => {
             const tableData = {
                 referrer: referrer_id,
                 channel: channel_id,
-                'ip-address': JSON.stringify(ipAddr)
+                'ip-address': JSON.stringify(ipAddr, null, 2)
                     .split('"')
                     .join(''),
                 platform: 'twitch',
