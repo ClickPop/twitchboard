@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
 const airtable = require('airtable');
-const axios = require('axios');
 const bcrypt = require('bcrypt');
+const request = require('request');
 require('dotenv').config();
 const api_key = process.env.API_KEY;
 
@@ -16,7 +16,7 @@ app.get('/:channel_id/:referrer_id', async (req, res) => {
         // A bit of destructuring and variable naming then creating the hash
         const { channel_id, referrer_id } = req.params;
         const useragent = req.headers['user-agent'];
-        const ipAddr = await axios.get('https://api.ipify.org?format=json');
+        const ipAddr = req.connection.remoteAddress;
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(useragent + ipAddr, salt);
 
@@ -25,7 +25,7 @@ app.get('/:channel_id/:referrer_id', async (req, res) => {
             const tableData = {
                 referrer: referrer_id,
                 channel: channel_id,
-                'ip-address': ipAddr.data.ip.toString(),
+                'ip-address': ipAddr,
                 platform: 'twitch',
                 'data-hash': hash,
                 'user-agent': useragent
