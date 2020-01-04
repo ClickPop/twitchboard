@@ -16,7 +16,12 @@ app.get('/:channel_id/:referrer_id', async (req, res) => {
         // A bit of destructuring and variable naming then creating the hash
         const { channel_id, referrer_id } = req.params;
         const useragent = req.headers['user-agent'];
-        const ipAddr = req.connection.remoteAddress;
+        const ipv4 = req.connection.remoteAddress.replace(/^.*:/, '');
+        const ipv6 = req.connection.remoteAddress.replace(ipv4, '');
+        const ipAddr = {
+            ipv6,
+            ipv4
+        };
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(useragent + ipAddr, salt);
 
@@ -25,7 +30,9 @@ app.get('/:channel_id/:referrer_id', async (req, res) => {
             const tableData = {
                 referrer: referrer_id,
                 channel: channel_id,
-                'ip-address': ipAddr,
+                'ip-address': JSON.stringify(ipAddr)
+                    .split('"')
+                    .join(''),
                 platform: 'twitch',
                 'data-hash': hash,
                 'user-agent': useragent
