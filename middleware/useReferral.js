@@ -24,7 +24,7 @@ module.exports = async function(req, res, next) {
         const tableData = {
             referrer: referrer_id,
             channel: channel_id,
-            'ip-address': JSON.stringify(ipAddr, null, 2)
+            'ip-address': JSON.stringify(ipAddr)
                 .split('"')
                 .join(''),
             platform: 'twitch',
@@ -50,7 +50,7 @@ module.exports = async function(req, res, next) {
                     referral = Object.entries(record.fields);
                     referral.unshift(['id', record.id]);
                     res.locals.result = referral.map(key =>
-                        JSON.stringify(key)
+                        JSON.stringify(key, null, 2)
                     );
                     next();
                 });

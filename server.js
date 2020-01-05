@@ -12,7 +12,10 @@ app.set('view engine', 'pug');
 //Connect to Airtable
 const base = new airtable({ apiKey: api_key }).base('appeqb1CAXVkBv8hN');
 
-app.get('/', (req, res) => res.send('API Running'));
+app.get('/', (req, res) => {
+    res.locals.result = ['API Running'];
+    res.render('index');
+});
 
 app.get('/:channel_id', getReferrals, (req, res) => {
     console.log(res.locals.result);
