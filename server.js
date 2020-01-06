@@ -36,7 +36,6 @@ app.get('/admin', (req, res) => {
 });
 
 app.get('/:channel_id', getReferrals, processLeaderboard, (req, res) => {
-    console.log(res.locals.result);
     res.render('index');
 });
 
