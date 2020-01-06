@@ -12,6 +12,8 @@ app.set('view engine', 'pug');
 //Connect to Airtable
 const base = new airtable({ apiKey: api_key }).base('appeqb1CAXVkBv8hN');
 
+app.use('/css', express.static('css'));
+
 app.get('/', (req, res) => {
     res.locals.result = ['API Running'];
     res.render('index');
