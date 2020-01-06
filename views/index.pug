@@ -13,4 +13,4 @@ html(lang='en')
     div(class='app')
       ul(class='leaderboard')
         each val in result
-          li= val
+          li= JSON.stringify(val.referrer)
