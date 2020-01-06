@@ -5,7 +5,7 @@ const api_key = process.env.API_KEY;
 //Connect to Airtable
 const base = new airtable({ apiKey: api_key }).base('appeqb1CAXVkBv8hN');
 
-module.exports = async function(req, res, next) {
+module.exports = async function(req, res, next = console.error) {
     var users = [];
     var i = 0;
     const channel = req.params.channel_id;
@@ -22,14 +22,13 @@ module.exports = async function(req, res, next) {
                     users.push(record.fields);
                 });
                 fetchNextPage();
-                res.locals.result = users.map(user => JSON.stringify(user));
-                next();
             },
             function done(err) {
                 if (err) {
-                    console.error(err);
-                    return;
+                    next(err);
                 }
+                res.locals.result = users.map(user => JSON.stringify(user));
+                next();
             }
         );
 };
