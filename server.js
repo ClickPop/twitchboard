@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const airtable = require('airtable');
+const resetLeaderboard = require('./middleware/resetLeaderboard');
+const getLeaderboardSettings = require('./middleware/getLeaderboardSettings');
 const getReferrals = require('./middleware/getReferrals');
 const useReferral = require('./middleware/useReferral');
 require('dotenv').config();
@@ -15,6 +17,17 @@ const base = new airtable({ apiKey: api_key }).base('appeqb1CAXVkBv8hN');
 app.get('/', (req, res) => {
     res.locals.result = ['API Running'];
     res.render('index');
+});
+app.get('/admin', (req, res) => {
+    res.send('Thou shalt not pass!');
+})
+app.get('/admin/:channel_id', getLeaderboardSettings, getReferrals, (req, res) => {
+    res.render('admin');
+});
+app.get('/admin/:channel_id/reset', resetLeaderboard, (req, res) => {
+    var channel = req.params.channel_id;
+    console.log('Resetting leaderboard...');
+    res.send('Resetting leaderboard...')
 });
 
 app.get('/:channel_id', getReferrals, (req, res) => {
