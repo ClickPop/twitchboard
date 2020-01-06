@@ -6,8 +6,6 @@ const api_key = process.env.API_KEY;
 const base = new airtable({ apiKey: api_key }).base('appeqb1CAXVkBv8hN');
 
 module.exports = async function(req, res, next) {
-    var leaderboard = null;
-    var i = 0;
     const channel = req.params.channel_id;
     res.locals.channel = channel;
 

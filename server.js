@@ -1,43 +1,48 @@
+const path = require('path');
 const express = require('express');
 const app = express();
-const airtable = require('airtable');
+
 const resetLeaderboard = require('./middleware/resetLeaderboard');
 const getLeaderboardSettings = require('./middleware/getLeaderboardSettings');
 const getReferrals = require('./middleware/getReferrals');
 const useReferral = require('./middleware/useReferral');
 require('dotenv').config();
-const api_key = process.env.API_KEY;
+
+function errorHandler (err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+}
 
 app.set('views', './views');
 app.set('view engine', 'pug');
 
-//Connect to Airtable
-const base = new airtable({ apiKey: api_key }).base('appeqb1CAXVkBv8hN');
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
+// Root Route
 app.get('/', (req, res) => {
-    res.locals.result = ['API Running'];
-    res.render('index');
+    res.send('API is running.');
 });
-app.get('/admin', (req, res) => {
-    res.send('Thou shalt not pass!');
-})
+
+// Admin Routes
 app.get('/admin/:channel_id', getLeaderboardSettings, getReferrals, (req, res) => {
     res.render('admin');
 });
-app.get('/admin/:channel_id/reset', resetLeaderboard, (req, res) => {
-    var channel = req.params.channel_id;
-    console.log('Resetting leaderboard...');
+app.get('/admin/:channel_id/reset', resetLeaderboard);
+app.get('/admin', (req, res) => {
+    res.send('Thou shalt not pass!');
 });
 
+// Leaderboard Route
 app.get('/:channel_id', getReferrals, (req, res) => {
-    console.log(res.locals.result);
     res.render('index');
 });
 
+// Referral Route
 app.get('/:channel_id/:referrer_id', useReferral, (req, res) => {
-    console.log(res.locals.result);
     res.render('index');
 });
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
