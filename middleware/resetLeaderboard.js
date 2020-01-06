@@ -9,7 +9,6 @@ module.exports = async function(req, res, next) {
     var leaderboard = null;
     var i = 0;
     const channel = req.params.channel_id;
-    res.locals.channel = channel;
     var tempID = null;
     var currentTime = new Date();
     currentTime = currentTime.toISOString();
@@ -25,9 +24,9 @@ module.exports = async function(req, res, next) {
             if (err) { next(err); return; }
 
             try {
-                records.forEach(function(record) {
+                records.forEach(async function(record) {
                     tempID = record.id;
-                    base('leaderboards').update([
+                    await base('leaderboards').update([
                         {
                             "id": "rec4UsbCHEoW5BAoF",
                             "fields": {"reset-timestamp": currentTime}

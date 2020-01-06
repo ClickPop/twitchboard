@@ -27,7 +27,6 @@ app.get('/admin/:channel_id', getLeaderboardSettings, getReferrals, (req, res) =
 app.get('/admin/:channel_id/reset', resetLeaderboard, (req, res) => {
     var channel = req.params.channel_id;
     console.log('Resetting leaderboard...');
-    res.send('Resetting leaderboard...')
 });
 
 app.get('/:channel_id', getReferrals, (req, res) => {
