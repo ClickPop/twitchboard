@@ -5,15 +5,21 @@ html(lang='en')
     meta(content='text/html;charset=utf-8', http-equiv='Content-Type')
     meta(content='utf-8', http-equiv='encoding')
     title Admin Area (#{channel})
+    
+    link(rel='stylesheet', href='/public/css/app.css')
+    link(rel='apple-touch-icon', sizes='180x180', href='/public/favicon/apple-touch-icon.png')
+    link(rel='icon', type='image/png' sizes='32x32', href='/public/favicon/favicon-32x32.png')
+    link(rel='icon', type='image/png' sizes='16x16', href='/public/favicon/favicon-16x16.png')
+    link(rel='manifest', href='/public/favicon/site.webmanifest')
 
   body
     block content
-    div(class='app')
+    div(class='app container')
       h1 Admin Area
       
       section(class='admin-section leaderboard-settings')
         h2 Leaderboard Settings
-        table(class='settings')
+        table(class='table settings col-auto')
             tr
                 th Current Theme
                 th Background Opacity
@@ -23,7 +29,7 @@ html(lang='en')
                 td= leaderboardSettings['background-opacity']
                 td= leaderboardSettings['reset-timestamp']
                 
-        a(href='/admin/' + channel + '/reset') Reset Leaderboard
+        a(href='/admin/' + channel + '/reset', class='btn btn-primary') Reset Leaderboard
                 
       section(class='admin-section current-leaderboard')
         h2 Current Leaderboard

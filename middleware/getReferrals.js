@@ -5,12 +5,12 @@ const api_key = process.env.API_KEY;
 //Connect to Airtable
 const base = new airtable({ apiKey: api_key }).base('appeqb1CAXVkBv8hN');
 
-module.exports = async function(req, res, next = console.error) {
-    var users = [];
-    var i = 0;
+module.exports = function(req, res, next) {
+    console.log('router-level-middleware', req.url);
+    var data = [];
     const channel = req.params.channel_id;
 
-    await base('referrals')
+    base('referrals')
         .select({
             view: 'Grid view',
             fields: ['referrer', 'channel', 'data-hash'],
@@ -19,7 +19,7 @@ module.exports = async function(req, res, next = console.error) {
         .eachPage(
             function page(records, fetchNextPage) {
                 records.forEach(function(record) {
-                    users.push(record.fields);
+                    data.push(record.fields);
                 });
                 fetchNextPage();
             },
@@ -27,7 +27,11 @@ module.exports = async function(req, res, next = console.error) {
                 if (err) {
                     next(err);
                 }
-                res.locals.result = users.map(user => JSON.stringify(user));
+
+                // data.forEach((referral))
+
+
+                res.locals.result = data.map(user => JSON.stringify(user));
                 next();
             }
         );

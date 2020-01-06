@@ -5,15 +5,13 @@ const api_key = process.env.API_KEY;
 //Connect to Airtable
 const base = new airtable({ apiKey: api_key }).base('appeqb1CAXVkBv8hN');
 
-module.exports = async function(req, res, next) {
-    var leaderboard = null;
-    var i = 0;
+module.exports = function(req, res, next) {
     const channel = req.params.channel_id;
     var tempID = null;
     var currentTime = new Date();
     currentTime = currentTime.toISOString();
 
-    await base('leaderboards')
+    base('leaderboards')
         .select({
             view: 'Grid view',
             fields: ['channel'],
@@ -24,17 +22,16 @@ module.exports = async function(req, res, next) {
             if (err) { next(err); return; }
 
             try {
-                records.forEach(async function(record) {
+                records.forEach(function(record) {
                     tempID = record.id;
-                    await base('leaderboards').update([
+                    base('leaderboards').update([
                         {
-                            "id": "rec4UsbCHEoW5BAoF",
+                            "id": tempID,
                             "fields": {"reset-timestamp": currentTime}
                         }
                     ], function(err, records) {
                         if (err) {
-                            console.error(err);
-                            next(err); return;
+                            next(err);
                         }
                         records.forEach(function(record) {
                             console.log('Reset leaderboard', record.get('channel'));
@@ -42,9 +39,8 @@ module.exports = async function(req, res, next) {
                     });
                 });
             } catch(err) {
-                next(err); return;
+                next(err);
             }
             res.redirect(`/admin/${channel}`);
-            next();
         });
     };
