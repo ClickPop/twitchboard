@@ -11,6 +11,8 @@ html(lang='en')
   body
     block content
     div(class='app')
-      ul(class='leaderboard')
+      table(class='leaderboard')
         each val in result
-          li= JSON.stringify(val.referrer)
+          tr
+            td= JSON.stringify(val.referrer).replace(/\"/g, "")
+            td= JSON.stringify(val.channel).replace(/\"/g, "")
