@@ -16,7 +16,7 @@ function addOrIncrementReferrer(referral, leaderboard){
 
 }
 
-module.exports = function(req, res, next = console.error) {
+module.exports = function(req, res, next) {
     var referrals = res.locals.referrals;
     var settings = res.locals.leaderboardSettings;
 
