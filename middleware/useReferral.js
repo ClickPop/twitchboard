@@ -44,10 +44,12 @@ module.exports = async function(req, res, next) {
                     return;
                 }
                 records.forEach(function(record) {
-                    referral = record.fields;
-                    referral._id = record.id;
-                    res.locals.result = referral;
-                    console.log(referral);
+                    console.log(record.id, record.fields);
+                    referral = Object.entries(record.fields);
+                    referral.unshift(['id', record.id]);
+                    res.locals.result = referral.map(key =>
+                        JSON.stringify(key, null, 2)
+                    );
                     next();
                 });
             }

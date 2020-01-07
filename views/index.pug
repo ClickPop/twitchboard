@@ -4,15 +4,25 @@ html(lang='en')
     meta(charset='utf-8')
     meta(content='text/html;charset=utf-8', http-equiv='Content-Type')
     meta(content='utf-8', http-equiv='encoding')
-    title Twitch Leaderboard
-    link(rel="stylesheet", href="/css/style.css")
 
+    title Twitch Leaderboard
+
+    link(rel='stylesheet', href='/public/css/app.css')
+    link(rel='apple-touch-icon', sizes='180x180', href='/public/favicon/apple-touch-icon.png')
+    link(rel='icon', type='image/png' sizes='32x32', href='/public/favicon/favicon-32x32.png')
+    link(rel='icon', type='image/png' sizes='16x16', href='/public/favicon/favicon-16x16.png')
+    link(rel='manifest', href='/public/favicon/site.webmanifest')
 
   body
     block content
     div(class='app')
-      table(class='leaderboard')
-        each val in result
-          tr
-            td= JSON.stringify(val.referrer).replace(/\"/g, "")
-            td= JSON.stringify(val.channel).replace(/\"/g, "")
+        - if (typeof(leaderboard) !== 'undefined'){
+            table(class='leaderboard table')
+                tr
+                    th Name
+                    th Views
+                each row in leaderboard
+                    tr
+                        td= row.referrer
+                        td= row.views
+        -}

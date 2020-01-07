@@ -1,26 +1,56 @@
 {
-  "name": "leaderboard",
-  "version": "1.0.0",
-  "description": "Twitch referreal leaderboard",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon server.js"
-  },
-  "keywords": [
-    "twitch",
-    "leaderboard"
-  ],
-  "author": "Graham Vasquez",
-  "license": "MIT",
-  "dependencies": {
-    "airtable": "^0.8.1",
-    "bcrypt": "^3.0.7",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "pug": "^2.0.4"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.2"
-  }
+    "name": "twitchboard",
+    "version": "1.0.0",
+    "description": "Twitch referreal leaderboard",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "server": "nodemon server.js"
+    },
+    "keywords": [
+        "twitch",
+        "leaderboard"
+    ],
+    "engines": {
+        "node": ">= 8.0.0"
+    },
+    "author": {
+        "name": "ClickPop",
+        "url": "https://clickpopmedia.com"
+    },
+    "contributors": [
+        {
+            "name": "Graham Vasquez",
+            "url": "https://github.com/GV14982"
+        },
+        {
+            "name": "Chris Vasquez",
+            "url": "https://github.com/cvasquez"
+        },
+        {
+            "name": "Sean Metzgar",
+            "url": "https://github.com/seanmetzgar"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ClickPop/twitchboard.git"
+    },
+    "bugs": "https://github.com/ClickPop/twitchboard/issues",
+    "homepage": "https://twitchboard.me",
+    "license": "MIT",
+    "dependencies": {
+        "airtable": "^0.8.1",
+        "bcrypt": "^3.0.7",
+        "bootstrap": "^4.4.1",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "node-sass-middleware": "^0.11.0",
+        "pug": "^2.0.4",
+        "serve-favicon": "^2.5.0"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.2",
+        "bootstrap": "^4.4.1"
+    }
 }
