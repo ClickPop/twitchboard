@@ -1,1 +1,50 @@
 @import "../../node_modules/bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+
+body {
+  background: #000000;
+}
+
+// Colors
+$textColor:                                 #ffffff;
+$primaryColor:                              #19d8e0;
+$secondaryColor:                            #fffb07;
+
+// Border Variables
+$leaderboardSizer:                          8px;
+$leaderboardBorderRadius:                   $leaderboardSizer;
+$leaderboardBorderWidth:                    $leaderboardSizer;
+$leaderboardBorderShadow:                   $primaryColor 0px 0px 0 12px;
+
+.leaderboard {
+  padding: 12px;
+
+  &__table {
+    border-radius: $leaderboardBorderRadius;
+    box-shadow: $leaderboardBorderShadow;
+    box-sizing: border-box;
+    color: $textColor;
+    font-family: "Press Start 2P", arial, sans-serif;
+    overflow: hidden;
+  }
+
+  th {
+    background: #transparent;
+    border: none;
+    color: $secondaryColor;
+    font-weight: normal;
+  }
+
+  td {
+    border-top: $leaderboardSizer solid $primaryColor;
+  }
+
+  tr {
+    &:nth-child(odd) {
+      background: #00012f;
+    }
+    &:nth-child(even) {
+      background: #000098;
+    }
+  }
+}

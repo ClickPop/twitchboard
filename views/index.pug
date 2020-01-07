@@ -17,12 +17,13 @@ html(lang='en')
     block content
     div(class='app')
         - if (typeof(leaderboard) !== 'undefined'){
-            table(class='leaderboard table')
-                tr
-                    th Name
-                    th Views
-                each row in leaderboard
+            div(class="leaderboard")
+                table(class='leaderboard__table table')
                     tr
-                        td= row.referrer
-                        td= row.views
+                        th Name
+                        th Views
+                    each row in leaderboard
+                        tr
+                            td= row.referrer
+                            td= row.views
         -}
