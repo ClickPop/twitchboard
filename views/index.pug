@@ -2,14 +2,17 @@ doctype html
 html(lang='en')
   head
     meta(charset='utf-8')
-    title
     meta(content='text/html;charset=utf-8', http-equiv='Content-Type')
     meta(content='utf-8', http-equiv='encoding')
-    title= title
+    title Twitch Leaderboard
+    link(rel="stylesheet", href="/css/style.css")
+
 
   body
     block content
     div(class='app')
-      ul(class='leaderboard')
+      table(class='leaderboard')
         each val in result
-          li= val
+          tr
+            td= JSON.stringify(val.referrer).replace(/\"/g, "")
+            td= JSON.stringify(val.channel).replace(/\"/g, "")

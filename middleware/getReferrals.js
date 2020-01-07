@@ -13,7 +13,6 @@ module.exports = async function(req, res, next) {
     await base('referrals')
         .select({
             view: 'Grid view',
-            fields: ['referrer', 'channel', 'data-hash'],
             filterByFormula: `{channel} = "${channel}"`
         })
         .eachPage(
@@ -22,7 +21,8 @@ module.exports = async function(req, res, next) {
                     users.push(record.fields);
                 });
                 fetchNextPage();
-                res.locals.result = users.map(user => JSON.stringify(user));
+                res.locals.result = users;
+                console.log(users);
                 next();
             },
             function done(err) {

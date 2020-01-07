@@ -12,19 +12,18 @@ app.set('view engine', 'pug');
 //Connect to Airtable
 const base = new airtable({ apiKey: api_key }).base('appeqb1CAXVkBv8hN');
 
+app.use('/css', express.static('css'));
+
 app.get('/', (req, res) => {
-    res.locals.result = ['API Running'];
-    res.render('index');
+    res.send('API Running');
 });
 
 app.get('/:channel_id', getReferrals, (req, res) => {
-    console.log(res.locals.result);
     res.render('index');
 });
 
 app.get('/:channel_id/:referrer_id', useReferral, (req, res) => {
-    console.log(res.locals.result);
-    res.render('index');
+    // res.redirect(`https://twich.tv/${req.params.channel_id}`);
 });
 
 const PORT = process.env.PORT || 5000;
