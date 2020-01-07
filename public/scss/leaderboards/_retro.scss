@@ -1,0 +1,54 @@
+// Colors
+$textColor:                                 #ffffff;
+$primaryColor:                              #19d8e0;
+$secondaryColor:                            #fffb07;
+
+// Border Variables
+$leaderboardSizer:                          8px;
+$leaderboardBorderRadius:                   $leaderboardSizer;
+$leaderboardBorderWidth:                    $leaderboardSizer;
+$leaderboardBorderShadow:                   $primaryColor 0px 0px 0 12px;
+
+.leaderboard.retro {
+  padding: 12px;
+
+  table {
+    border-collapse: collapse;
+    border-radius: $leaderboardBorderRadius;
+    box-shadow: $leaderboardBorderShadow;
+    box-sizing: border-box;
+    color: $textColor;
+    font-family: "Press Start 2P", arial, sans-serif;
+    overflow: hidden;
+    width: 100%;
+
+    .admin-preview & {
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+  }
+
+  th,td {
+      padding: 4px 10px;
+  }
+  th {
+    background: transparent;
+    border: none;
+    color: $secondaryColor;
+    font-weight: normal;
+  }
+
+  td {
+    border-top: $leaderboardSizer solid $primaryColor;
+  }
+
+  tr {
+    &:nth-child(odd) {
+      background: #00012f;
+    }
+    &:nth-child(even) {
+      background: #000098;
+    }
+  }
+}
