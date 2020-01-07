@@ -9,6 +9,7 @@ const getLeaderboardSettings = require('./middleware/getLeaderboardSettings');
 const getReferrals = require('./middleware/getReferrals');
 const useReferral = require('./middleware/useReferral');
 const requestIP = require('./middleware/requestIP');
+const excludeFavicon = require('./middleware/exludeFavicon');
 require('dotenv').config();
 
 function errorHandler (err, req, res, next) {
@@ -20,8 +21,7 @@ app.set('views', './views');
 app.set('view engine', 'pug');
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
-
-app.use(requestIP);
+app.use(excludeFavicon);
 
 // Root Route
 app.get('/', (req, res) => {
@@ -43,7 +43,7 @@ app.get('/:channel_id', getLeaderboardSettings, getReferrals, processLeaderboard
 });
 
 // Referral Route
-app.get('/:channel_id/:referrer_id', useReferral, (req, res) => {
+app.get('/:channel_id/:referrer_id', requestIP, useReferral, (req, res) => {
     res.render('index');
 });
 

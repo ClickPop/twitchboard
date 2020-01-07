@@ -8,7 +8,7 @@
         "server": "nodemon server.js",
         "build": "sass ./public/scss/app.scss ./public/css/app.css",
         "build:watch": "sass --watch ./public/scss/app.scss ./public/css/app.css",
-        "setup": "npm install && npm build",
+        "setup": "npm install && npm run build"
     },
     "keywords": [
         "twitch",
