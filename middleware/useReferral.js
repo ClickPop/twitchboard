@@ -39,19 +39,9 @@ module.exports = async function(req, res, next) {
                 }
             ],
             function(err, records) {
-                if (err) {
-                    console.error(err);
-                    return;
-                }
-                records.forEach(function(record) {
-                    console.log(record.id, record.fields);
-                    referral = Object.entries(record.fields);
-                    referral.unshift(['id', record.id]);
-                    res.locals.result = referral.map(key =>
-                        JSON.stringify(key, null, 2)
-                    );
-                    next();
-                });
+                if (err) { next(err); }
+
+                res.redirect(`https://twitch.tv/${channel_id}`);
             }
         );
     }

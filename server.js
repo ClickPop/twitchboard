@@ -43,9 +43,7 @@ app.get('/:channel_id', getLeaderboardSettings, getReferrals, processLeaderboard
 });
 
 // Referral Route
-app.get('/:channel_id/:referrer_id', requestIP, useReferral, (req, res) => {
-    res.render('index');
-});
+app.get('/:channel_id/:referrer_id', requestIP, useReferral);
 
 app.use(errorHandler);
 
