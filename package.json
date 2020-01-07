@@ -5,7 +5,10 @@
     "main": "server.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "server": "nodemon server.js"
+        "server": "nodemon server.js",
+        "build": "sass ./public/scss/app.scss ./public/css/app.css",
+        "build:watch": "sass --watch ./public/scss/app.scss ./public/css/app.css",
+        "setup": "npm install && npm build",
     },
     "keywords": [
         "twitch",
