@@ -32,8 +32,6 @@ module.exports = async function(req, res, next) {
             'user-agent': useragent
         };
 
-        // var referral = [];
-
         await base('referrals').create(
             [
                 {

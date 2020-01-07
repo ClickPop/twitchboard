@@ -1,2 +1,4 @@
 /node_modules
 .env
+/.sass-cache
+package-lock.json

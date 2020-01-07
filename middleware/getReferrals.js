@@ -12,7 +12,6 @@ module.exports = function(req, res, next = console.error) {
     base('referrals')
         .select({
             view: 'Grid view',
-            fields: ['referrer', 'channel', 'data-hash'],
             filterByFormula: `{channel} = "${channel}"`
         })
         .eachPage(
