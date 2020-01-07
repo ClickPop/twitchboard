@@ -1,50 +1,54 @@
 @import "../../node_modules/bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
 
-body {
-  background: #000000;
+/** Admin Section */
+#background-opacity-slider {
+    .slider-selection {
+       	background: #BABABA;
+    }
+    .tooltip {
+        &.in {
+            opacity: 1;
+        }
+
+        &.top {
+            padding: 5px 0;
+        }
+
+        .tooltip-arrow {
+            bottom: 0;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px 5px 0;
+            border-top-color: #000;
+        }
+    }
+    .tooltip-arrow {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+    }
 }
 
-// Colors
-$textColor:                                 #ffffff;
-$primaryColor:                              #19d8e0;
-$secondaryColor:                            #fffb07;
-
-// Border Variables
-$leaderboardSizer:                          8px;
-$leaderboardBorderRadius:                   $leaderboardSizer;
-$leaderboardBorderWidth:                    $leaderboardSizer;
-$leaderboardBorderShadow:                   $primaryColor 0px 0px 0 12px;
-
-.leaderboard {
-  padding: 12px;
-
-  &__table {
-    border-radius: $leaderboardBorderRadius;
-    box-shadow: $leaderboardBorderShadow;
-    box-sizing: border-box;
-    color: $textColor;
-    font-family: "Press Start 2P", arial, sans-serif;
-    overflow: hidden;
-  }
-
-  th {
-    background: #transparent;
-    border: none;
-    color: $secondaryColor;
-    font-weight: normal;
-  }
-
-  td {
-    border-top: $leaderboardSizer solid $primaryColor;
-  }
-
-  tr {
-    &:nth-child(odd) {
-      background: #00012f;
-    }
-    &:nth-child(even) {
-      background: #000098;
-    }
-  }
+.full-width-div {
+    position: absolute;
+    width: 100%;
+    left: 0;
 }
+
+.admin-preview {
+    padding: 50px 0;
+    background: black url('../images/stream-sample.jpg') 50% 50% no-repeat;
+    background-size: cover;
+
+    .leaderboard__table {
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@import 'leaderboards/simple';
+@import 'leaderboards/retro';

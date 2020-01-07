@@ -21,6 +21,7 @@ module.exports = function(req, res, next) {
             try {
                 records.forEach(function(record) {
                     res.locals.leaderboardSettings = record.fields;
+                    res.locals.leaderboardSettings.id = record.id;
                 });
             } catch(e) {
                 next(e); return;

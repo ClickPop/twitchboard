@@ -17,8 +17,8 @@ html(lang='en')
     block content
     div(class='app')
         - if (typeof(leaderboard) !== 'undefined'){
-            div(class="leaderboard")
-                table(class='leaderboard__table table')
+            div(class='leaderboard ' + leaderboardSettings.theme)
+                table(class='leaderboard__table')
                     tr
                         th Name
                         th Views

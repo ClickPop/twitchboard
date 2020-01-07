@@ -6,7 +6,13 @@ html(lang='en')
     meta(content='utf-8', http-equiv='encoding')
 
     title Admin Area (#{channel})
-
+    
+    link(
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/css/bootstrap-slider.min.css"
+        integrity="sha256-G3IAYJYIQvZgPksNQDbjvxd/Ca1SfCDFwu2s2lt0oGo="
+        crossorigin="anonymous"
+    )
     link(rel='stylesheet', href='/public/css/app.css')
     link(rel='apple-touch-icon', sizes='180x180', href='/public/favicon/apple-touch-icon.png')
     link(rel='icon', type='image/png' sizes='32x32', href='/public/favicon/favicon-32x32.png')
@@ -23,24 +29,49 @@ html(lang='en')
         table(class='table settings col-auto')
             tr
                 th Current Theme
-                th Background Opacity
+                //- th Background Opacity
                 th Last Reset
             tr
-                td= leaderboardSettings.theme
-                td= leaderboardSettings['background-opacity']
+                td
+                    select(class='form-control theme-select text-primary' name='theme' data-channel=channel)
+                        option(value='retro' selected= leaderboardSettings.theme === 'retro') retro
+                        option(value='simple' selected= leaderboardSettings.theme === 'simple') simple
+                //-
+                    td
+                        input(
+                            class='range-slider background-opacity'
+                            type='text'
+                            data-slider-id='background-opacity-slider'
+                            data-slider-min='0'
+                            data-slider-max='100'
+                            data-slider-step='1'
+                            data-slider-tooltip='show'
+                            data-slider-value=leaderboardSettings['background-opacity']
+                        )
                 td= leaderboardSettings['reset-timestamp']
-
-        a(href='/admin/' + channel + '/reset', class='btn btn-primary') Reset Leaderboard
+                    a(href='/admin/' + channel + '/reset' class='btn btn-outline-primary') Reset Leaderboard
+                
 
       section(class='admin-section current-leaderboard')
         h2 Current Leaderboard
-        - if (typeof(leaderboard) !== 'undefined'){
-            table(class='leaderboard table')
-                tr
-                    th Name
-                    th Views
-                each row in leaderboard
-                    tr
-                        td= row.referrer
-                        td= row.views
-        -}
+        div(class='admin-preview full-width-div')
+            div(class='container' data-current-theme=leaderboardSettings.theme)
+                - if (typeof(leaderboard) !== 'undefined'){
+                    div(class='leaderboard ' + leaderboardSettings.theme)
+                        table
+                            tr
+                                th Name
+                                th Views
+                            each row in leaderboard
+                                tr
+                                    td= row.referrer
+                                    td= row.views
+                -}
+        
+        script(
+            src='https://code.jquery.com/jquery-3.4.1.min.js'
+            integrity='sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo='
+            crossorigin='anonymous'
+        )
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/bootstrap-slider.min.js' type='text/javascript')
+        script(src='/public/js/scripts.js' type='text/javascript')
