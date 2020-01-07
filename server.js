@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 
 const processLeaderboard = require('./middleware/processLeaderboard');
+const setTheme = require('./middleware/setTheme');
 const resetLeaderboard = require('./middleware/resetLeaderboard');
 const getLeaderboardSettings = require('./middleware/getLeaderboardSettings');
 const getReferrals = require('./middleware/getReferrals');
@@ -31,12 +32,13 @@ app.get('/', (req, res) => {
 app.get('/admin/:channel_id', getLeaderboardSettings, getReferrals, processLeaderboard, (req, res) => {
     res.render('admin');
 });
-app.get('/admin/:channel_id/reset', resetLeaderboard);
+app.get('/admin/:channel_id/reset', getLeaderboardSettings, resetLeaderboard);
+app.post('/admin/:channel_id/set-theme/:theme', getLeaderboardSettings, setTheme);
 app.get('/admin', (req, res) => {
     res.send('Thou shalt not pass!');
 });
 
-app.get('/:channel_id', getReferrals, processLeaderboard, (req, res) => {
+app.get('/:channel_id', getLeaderboardSettings, getReferrals, processLeaderboard, (req, res) => {
     res.render('index');
 });
 
