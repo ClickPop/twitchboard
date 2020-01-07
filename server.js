@@ -7,6 +7,7 @@ const resetLeaderboard = require('./middleware/resetLeaderboard');
 const getLeaderboardSettings = require('./middleware/getLeaderboardSettings');
 const getReferrals = require('./middleware/getReferrals');
 const useReferral = require('./middleware/useReferral');
+const requestIP = require('./middleware/requestIP');
 require('dotenv').config();
 
 function errorHandler (err, req, res, next) {
@@ -19,14 +20,14 @@ app.set('view engine', 'pug');
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
+app.use(requestIP);
+
 // Root Route
 app.get('/', (req, res) => {
     res.send('API is running.');
 });
 
-app.get('/admin', (req, res) => {
-    res.send('Thou shalt not pass!');
-})
+// Admin Routes
 app.get('/admin/:channel_id', getLeaderboardSettings, getReferrals, processLeaderboard, (req, res) => {
     res.render('admin');
 });

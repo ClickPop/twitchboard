@@ -5,7 +5,7 @@ const api_key = process.env.API_KEY;
 //Connect to Airtable
 const base = new airtable({ apiKey: api_key }).base('appeqb1CAXVkBv8hN');
 
-module.exports = function(req, res, next = console.error) {
+module.exports = function(req, res, next) {
     var referrals = [];
     const channel = req.params.channel_id;
 
