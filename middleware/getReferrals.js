@@ -5,9 +5,8 @@ const api_key = process.env.API_KEY;
 //Connect to Airtable
 const base = new airtable({ apiKey: api_key }).base('appeqb1CAXVkBv8hN');
 
-module.exports = function(req, res, next) {
-    console.log('router-level-middleware', req.url);
-    var data = [];
+module.exports = function(req, res, next = console.error) {
+    var referrals = [];
     const channel = req.params.channel_id;
 
     base('referrals')
@@ -19,7 +18,7 @@ module.exports = function(req, res, next) {
         .eachPage(
             function page(records, fetchNextPage) {
                 records.forEach(function(record) {
-                    data.push(record.fields);
+                    referrals.push(record.fields);
                 });
                 fetchNextPage();
             },
@@ -28,10 +27,7 @@ module.exports = function(req, res, next) {
                     next(err);
                 }
 
-                // data.forEach((referral))
-
-
-                res.locals.result = data.map(user => JSON.stringify(user));
+                res.locals.referrals = referrals;
                 next();
             }
         );

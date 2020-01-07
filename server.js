@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const app = express();
 
+const processLeaderboard = require('./middleware/processLeaderboard');
 const resetLeaderboard = require('./middleware/resetLeaderboard');
 const getLeaderboardSettings = require('./middleware/getLeaderboardSettings');
 const getReferrals = require('./middleware/getReferrals');
@@ -23,8 +24,10 @@ app.get('/', (req, res) => {
     res.send('API is running.');
 });
 
-// Admin Routes
-app.get('/admin/:channel_id', getLeaderboardSettings, getReferrals, (req, res) => {
+app.get('/admin', (req, res) => {
+    res.send('Thou shalt not pass!');
+})
+app.get('/admin/:channel_id', getLeaderboardSettings, getReferrals, processLeaderboard, (req, res) => {
     res.render('admin');
 });
 app.get('/admin/:channel_id/reset', resetLeaderboard);
@@ -32,8 +35,7 @@ app.get('/admin', (req, res) => {
     res.send('Thou shalt not pass!');
 });
 
-// Leaderboard Route
-app.get('/:channel_id', getReferrals, (req, res) => {
+app.get('/:channel_id', getReferrals, processLeaderboard, (req, res) => {
     res.render('index');
 });
 

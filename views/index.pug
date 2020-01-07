@@ -2,11 +2,12 @@ doctype html
 html(lang='en')
   head
     meta(charset='utf-8')
-    title
     meta(content='text/html;charset=utf-8', http-equiv='Content-Type')
     meta(content='utf-8', http-equiv='encoding')
-    title= title
     
+    title= title
+
+    link(rel='stylesheet', href='/public/css/app.css')
     link(rel='apple-touch-icon', sizes='180x180', href='/public/favicon/apple-touch-icon.png')
     link(rel='icon', type='image/png' sizes='32x32', href='/public/favicon/favicon-32x32.png')
     link(rel='icon', type='image/png' sizes='16x16', href='/public/favicon/favicon-16x16.png')
@@ -15,6 +16,13 @@ html(lang='en')
   body
     block content
     div(class='app')
-      ul(class='leaderboard')
-        each val in result
-          li= val
+        - if (typeof(leaderboard) !== 'undefined'){
+            table(class='leaderboard table')
+                tr
+                    th Name
+                    th Views
+                each row in leaderboard
+                    tr
+                        td= row.referrer
+                        td= row.views
+        -}
