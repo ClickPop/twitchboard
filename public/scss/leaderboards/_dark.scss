@@ -1,6 +1,7 @@
 // Variables
 // Colors
-$backgroundColor:                 #ffffff;
+$backgroundColor:                 #223333;
+$textColor:                       #fefeff;
 $gold:                            #ffd700;
 $silver:                          #C0C0C0;
 $bronze:                          #cd7f32;
@@ -9,13 +10,14 @@ $bronze:                          #cd7f32;
 $borderRadius:                    6px;
 
 // Styles
-.leaderboard.modern {
+.leaderboard.dark {
   padding: 1px;
 
   table {
     border-collapse: separate;
     border-spacing: 0 0.5rem;
     background-color: transparent;
+    color: $textColor;
 
     .admin-preview & {
         max-width: 80%;
@@ -54,7 +56,7 @@ $borderRadius:                    6px;
 
     &:nth-child(4) td {
       font-size: 1.1rem;
-      
+
       &:first-child::before {
         content: '\01F949';
         margin-right: 5px;
@@ -67,7 +69,7 @@ $borderRadius:                    6px;
 
   th,
   td {
-      background: $backgroundColor;
+      background: rgba($backgroundColor, 90%);
       padding: 4px 10px;
 
       &:first-child {

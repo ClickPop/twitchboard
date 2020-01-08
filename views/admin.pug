@@ -34,9 +34,9 @@ html(lang='en')
             tr
                 td
                     select(class='form-control theme-select text-primary' name='theme' data-channel=channel)
-                        option(value='modern' selected= leaderboardSettings.theme === 'modern') modern
+                        option(value='light' selected= leaderboardSettings.theme === 'light') light
+                        option(value='dark' selected= leaderboardSettings.theme === 'dark') dark
                         option(value='retro' selected= leaderboardSettings.theme === 'retro') retro
-                        option(value='simple' selected= leaderboardSettings.theme === 'simple') simple
                 //-
                     td
                         input(
