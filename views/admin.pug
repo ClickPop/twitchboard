@@ -6,7 +6,7 @@ html(lang='en')
     meta(content='utf-8', http-equiv='encoding')
 
     title Admin Area (#{channel})
-    
+
     link(
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/css/bootstrap-slider.min.css"
@@ -34,6 +34,7 @@ html(lang='en')
             tr
                 td
                     select(class='form-control theme-select text-primary' name='theme' data-channel=channel)
+                        option(value='modern' selected= leaderboardSettings.theme === 'modern') modern
                         option(value='retro' selected= leaderboardSettings.theme === 'retro') retro
                         option(value='simple' selected= leaderboardSettings.theme === 'simple') simple
                 //-
@@ -50,7 +51,7 @@ html(lang='en')
                         )
                 td= leaderboardSettings['reset-timestamp']
                     a(href='/admin/' + channel + '/reset' class='btn btn-outline-primary') Reset Leaderboard
-                
+
 
       section(class='admin-section current-leaderboard')
         h2 Current Leaderboard
@@ -67,7 +68,7 @@ html(lang='en')
                                     td= row.referrer
                                     td= row.views
                 -}
-        
+
         script(
             src='https://code.jquery.com/jquery-3.4.1.min.js'
             integrity='sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo='
