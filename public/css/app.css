@@ -7891,7 +7891,7 @@ a.text-dark:hover, a.text-dark:focus {
         box-shadow: inset #cd7f32 -6px 0 0 0; }
   .leaderboard.dark th,
   .leaderboard.dark td {
-    background: rgba(34, 51, 51, 0.9);
+    background: rgba(34, 34, 51, 0.9);
     padding: 4px 10px; }
     .leaderboard.dark th:first-child,
     .leaderboard.dark td:first-child {
@@ -7911,14 +7911,15 @@ a.text-dark:hover, a.text-dark:focus {
     box-sizing: border-box;
     color: #ffffff;
     font-family: "Press Start 2P", arial, sans-serif;
-    overflow: hidden;
-    width: 100%; }
+    overflow: hidden; }
     .admin-preview .leaderboard.retro table {
       max-width: 80%;
       margin-left: auto;
       margin-right: auto; }
   .leaderboard.retro th, .leaderboard.retro td {
     padding: 4px 10px; }
+    .leaderboard.retro th:last-child, .leaderboard.retro td:last-child {
+      text-align: center; }
   .leaderboard.retro th {
     background: transparent;
     border: none;

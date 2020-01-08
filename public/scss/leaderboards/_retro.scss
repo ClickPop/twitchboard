@@ -20,7 +20,6 @@ $leaderboardBorderShadow:                   $primaryColor 0px 0px 0 12px;
     color: $textColor;
     font-family: "Press Start 2P", arial, sans-serif;
     overflow: hidden;
-    width: 100%;
 
     .admin-preview & {
         max-width: 80%;
@@ -31,6 +30,10 @@ $leaderboardBorderShadow:                   $primaryColor 0px 0px 0 12px;
 
   th,td {
       padding: 4px 10px;
+
+      &:last-child {
+        text-align: center;
+      }
   }
   th {
     background: transparent;
