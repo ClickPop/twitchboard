@@ -1,5 +1,7 @@
-@import "../../node_modules/bootstrap/scss/bootstrap";
-@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+@import "../../node_modules/bootstrap/scss/bootstrap",
+        url('https://fonts.googleapis.com/css?family=Montserrat:400,700,900|Open+Sans:400,400i,700,700i|Press+Start+2P&display=swap'),
+        'partials/variables',
+        'partials/typography';
 
 /** Admin Section */
 #background-opacity-slider {
@@ -32,10 +34,8 @@
     }
 }
 
-.full-width-div {
-    position: absolute;
-    width: 100%;
-    left: 0;
+.preview {
+  background: $grey00;
 }
 
 .admin-preview {
@@ -43,13 +43,11 @@
     background: black url('../images/stream-sample.jpg') 50% 50% no-repeat;
     background-size: cover;
 
-    .leaderboard__table {
-        max-width: 80%;
-        margin-left: auto;
-        margin-right: auto;
+    .leaderboard {
     }
 }
 
-@import 'leaderboards/light';
-@import 'leaderboards/dark';
-@import 'leaderboards/retro';
+@import 'leaderboards/animation',
+        'leaderboards/light',
+        'leaderboards/dark',
+        'leaderboards/retro';
