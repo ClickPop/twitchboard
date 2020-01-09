@@ -27,8 +27,19 @@ $borderRadius:                    6px;
   }
 
   tr {
+    animation: FadeIn .3s ease-in-out;
+    animation-fill-mode: both;
     box-shadow: rgba(33, 38, 45, 0.2) 0 4px 12px, rgba(33, 38, 45, 0.15) 0 8px 24px;
 
+    &:first-child {
+      animation: none;
+    }
+
+    @for $i from 2 to 11 {
+      &:nth-child(#{$i}) {
+        animation-delay: $i * 0.1s;
+      }
+    }
 
     &:nth-child(2) td {
       font-size: 1.3rem;
