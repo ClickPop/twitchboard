@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const app = express();
+const { query, validationResult, sanitizeQuery } = require('express-validator');
 
 const processLeaderboard = require('./middleware/processLeaderboard');
 const setTheme = require('./middleware/setTheme');
@@ -10,11 +11,12 @@ const getReferrals = require('./middleware/getReferrals');
 const useReferral = require('./middleware/useReferral');
 const requestIP = require('./middleware/requestIP');
 const excludeFavicon = require('./middleware/exludeFavicon');
+const buildJSON = require('./middleware/buildJSON');
 require('dotenv').config();
 
 function errorHandler(err, req, res, next) {
-	console.error(err.stack);
-	res.status(500).send('Something broke!');
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
 }
 
 app.set('views', './views');
@@ -25,45 +27,91 @@ app.use(excludeFavicon);
 
 // Root Route
 app.get('/', (req, res) => {
-	res.send('API is running.');
+    res.send('API is running.');
 });
 
 // Admin Routes
 app.get(
-	'/admin/:channel_id',
-	getLeaderboardSettings,
-	getReferrals,
-	processLeaderboard,
-	(req, res) => {
-		res.render('admin');
-	}
+    '/admin/:channel',
+    getLeaderboardSettings,
+    getReferrals,
+    processLeaderboard,
+    (req, res) => {
+        res.render('admin');
+    }
 );
-app.get('/admin/:channel_id/reset', getLeaderboardSettings, resetLeaderboard);
-app.post(
-	'/admin/:channel_id/set-theme/:theme',
-	getLeaderboardSettings,
-	setTheme
-);
+app.get('/admin/:channel/reset', getLeaderboardSettings, resetLeaderboard);
+app.post('/admin/:channel/set-theme/:theme', getLeaderboardSettings, setTheme);
 app.get('/admin', (req, res) => {
-	res.send('Thou shalt not pass!');
+    res.send('Thou shalt not pass!');
 });
 
 app.get(
-	'/:channel_id',
-	getLeaderboardSettings,
-	getReferrals,
-	processLeaderboard,
-	(req, res) => {
-		res.render('index');
-	}
+    '/:channel',
+    getLeaderboardSettings,
+    getReferrals,
+    processLeaderboard,
+    (req, res) => {
+        res.render('index');
+    }
 );
 
-app.get('/api/v1/:channel_id', getReferrals, processLeaderboard, (req, res) => {
-	res.json(req.leaderboard);
-});
+app.get(
+    '/api/v1/getReferrals',
+    [
+        query('channel', 'Please specify a channel')
+            .trim()
+            .escape()
+            .exists(),
+        query('referrer')
+            .optional()
+            .trim()
+            .escape(),
+        query('since')
+            .optional()
+            .isISO8601()
+    ],
+    getReferrals,
+    buildJSON,
+    (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+        res.json(req.data);
+    }
+);
+
+app.get(
+    '/api/v1/getLeaderboard',
+    [
+        query('channel', 'Please specify a channel')
+            .trim()
+            .escape()
+            .exists(),
+        query('referrer')
+            .optional()
+            .trim()
+            .escape(),
+        query('since')
+            .optional()
+            .isISO8601()
+    ],
+    getReferrals,
+    getLeaderboardSettings,
+    processLeaderboard,
+    buildJSON,
+    (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+        res.json(req.data);
+    }
+);
 
 // Referral Route
-app.get('/:channel_id/:referrer_id', requestIP, useReferral);
+app.get('/:channel/:referrer', requestIP, useReferral);
 
 app.use(errorHandler);
 

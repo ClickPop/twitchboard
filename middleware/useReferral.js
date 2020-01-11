@@ -8,7 +8,7 @@ const base = new airtable({ apiKey: api_key }).base('appeqb1CAXVkBv8hN');
 
 module.exports = async function(req, res, next) {
     // A bit of destructuring and variable naming then creating the hash
-    const { channel_id, referrer_id } = req.params;
+    const { channel, referrer } = req.params;
     const useragent = req.headers['user-agent'];
     const ipv4 = req.connection.remoteAddress.replace(/^.*:/, '');
     const ipv6 = req.connection.remoteAddress.replace(ipv4, '');
@@ -22,8 +22,8 @@ module.exports = async function(req, res, next) {
     //Compare the hash then add it to the database
     if (bcrypt.compare(useragent + ipAddr, hash)) {
         const tableData = {
-            referrer: referrer_id,
-            channel: channel_id,
+            referrer: referrer,
+            channel: channel,
             'ip-address': JSON.stringify(ipAddr)
                 .split('"')
                 .join(''),
@@ -39,9 +39,11 @@ module.exports = async function(req, res, next) {
                 }
             ],
             function(err, records) {
-                if (err) { next(err); }
+                if (err) {
+                    next(err);
+                }
 
-                res.redirect(`https://twitch.tv/${channel_id}`);
+                res.redirect(`https://twitch.tv/${channel}`);
             }
         );
     }
