@@ -12,9 +12,9 @@ const requestIP = require('./middleware/requestIP');
 const excludeFavicon = require('./middleware/exludeFavicon');
 require('dotenv').config();
 
-function errorHandler (err, req, res, next) {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
+function errorHandler(err, req, res, next) {
+	console.error(err.stack);
+	res.status(500).send('Something broke!');
 }
 
 app.set('views', './views');
@@ -25,21 +25,41 @@ app.use(excludeFavicon);
 
 // Root Route
 app.get('/', (req, res) => {
-    res.send('API is running.');
+	res.send('API is running.');
 });
 
 // Admin Routes
-app.get('/admin/:channel_id', getLeaderboardSettings, getReferrals, processLeaderboard, (req, res) => {
-    res.render('admin');
-});
+app.get(
+	'/admin/:channel_id',
+	getLeaderboardSettings,
+	getReferrals,
+	processLeaderboard,
+	(req, res) => {
+		res.render('admin');
+	}
+);
 app.get('/admin/:channel_id/reset', getLeaderboardSettings, resetLeaderboard);
-app.post('/admin/:channel_id/set-theme/:theme', getLeaderboardSettings, setTheme);
+app.post(
+	'/admin/:channel_id/set-theme/:theme',
+	getLeaderboardSettings,
+	setTheme
+);
 app.get('/admin', (req, res) => {
-    res.send('Thou shalt not pass!');
+	res.send('Thou shalt not pass!');
 });
 
-app.get('/:channel_id', getLeaderboardSettings, getReferrals, processLeaderboard, (req, res) => {
-    res.render('index');
+app.get(
+	'/:channel_id',
+	getLeaderboardSettings,
+	getReferrals,
+	processLeaderboard,
+	(req, res) => {
+		res.render('index');
+	}
+);
+
+app.get('/api/v1/:channel_id', getReferrals, processLeaderboard, (req, res) => {
+	res.json(req.leaderboard);
 });
 
 // Referral Route
