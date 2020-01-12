@@ -59,10 +59,17 @@ app.get(
 app.get(
     '/api/v1/getReferrals',
     [
-        query('channel', 'Please specify a channel')
+        query('channel')
+            .exists().withMessage('Please specify a channel')
+            .custom(channel => {
+                if (channel != undefined && channel.search(/[^a-z_]/) > -1) {
+                    throw new Error('Channel contains invalid characters')
+                } else {
+                    return true;
+                }
+            })
             .trim()
-            .escape()
-            .exists(),
+            .escape(),
         query('referrer')
             .optional()
             .trim()
@@ -85,10 +92,17 @@ app.get(
 app.get(
     '/api/v1/getLeaderboard',
     [
-        query('channel', 'Please specify a channel')
+        query('channel')
+            .exists().withMessage('Please specify a channel')
+            .custom(channel => {
+                if (channel != undefined && channel.search(/[^a-z_]/) > -1) {
+                    throw new Error('Channel contains invalid characters')
+                } else {
+                    return true;
+                }
+            })
             .trim()
-            .escape()
-            .exists(),
+            .escape(),
         query('referrer')
             .optional()
             .trim()
@@ -112,6 +126,10 @@ app.get(
 
 // Referral Route
 app.get('/:channel/:referrer', requestIP, useReferral);
+
+app.get('*', function(req, res){
+    res.status(404).send('Not Found');
+  });
 
 app.use(errorHandler);
 
