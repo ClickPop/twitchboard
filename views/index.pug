@@ -17,15 +17,20 @@ html(lang='en')
     block content
     div(id="hidden", style="display: none;")= JSON.stringify(leaderboard)
     div(class='app')
-        - if (typeof(leaderboard) !== 'undefined'){
-            div(class='leaderboard ' + leaderboardSettings.theme)
-                table(class='leaderboard__table')
-                    tr
-                        th Name
-                        th Views
-                    each row in leaderboard
-                        tr
-                            td= row.referrer
-                            td= row.views
-        -}
+      - if (typeof(leaderboard) !== 'undefined'){
+        div(class='leaderboard ' + leaderboardSettings.theme)
+          table(class='leaderboard__table')
+            tr
+              th Name
+              th Views
+            each row in leaderboard
+              tr
+                td= row.referrer
+                td= row.views
+      -}
+    script(
+      src='https://code.jquery.com/jquery-3.4.1.min.js'
+      integrity='sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo='
+      crossorigin='anonymous'
+    )
     script(src="/public/js/getUpdate.js")
