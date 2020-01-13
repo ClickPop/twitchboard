@@ -1,0 +1,59 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(content='text/html;charset=utf-8', http-equiv='Content-Type')
+    meta(content='utf-8', http-equiv='encoding')
+
+    title Buffs - Powerups for your stream
+
+    link(rel='stylesheet', href='/public/css/app.css')
+    link(rel='apple-touch-icon', sizes='180x180', href='/public/favicon/apple-touch-icon.png')
+    link(rel='icon', type='image/png' sizes='32x32', href='/public/favicon/favicon-32x32.png')
+    link(rel='icon', type='image/png' sizes='16x16', href='/public/favicon/favicon-16x16.png')
+    link(rel='manifest', href='/public/favicon/site.webmanifest')
+
+  body(class='bg--dark')
+    section(class='container my-3')
+      div(class='row')
+        div(class='col-12')
+          img(
+            src='/public/images/brand/buffs_logo.svg'
+            width='135'
+          )
+    section(class='container')
+      div(class='row')
+        div(class='col-6 my-5')
+          h1(class='display-1 mb-4') Let the people who love your stream build your stream.
+          h2(class='display-2 mb-5') We're building tools to help you find people who might like your content, and then get them to love it.
+          p Sign up to get updates on new BUFFS and other neat stuff we're doing.
+          form.af-form-wrapper(method='post', accept-charset='UTF-8', action='https://www.aweber.com/scripts/addlead.pl')
+            div(style='display: none;')
+              input(type='hidden', name='meta_web_form_id', value='1235515686')
+              input(type='hidden', name='meta_split_id', value='')
+              input(type='hidden', name='listname', value='awlist5515905')
+              input#redirect_d478a41485588edbe0e3a1be669f19f1(type='hidden', name='redirect', value='https://www.aweber.com/thankyou-coi.htm?m=text')
+              input(type='hidden', name='meta_adtracking', value='Homepage_Signup_form')
+              input(type='hidden', name='meta_message', value='1')
+              input(type='hidden', name='meta_required', value='name,email')
+              input(type='hidden', name='meta_tooltip', value='')
+            #af-form-1235515686.af-form
+              #af-body-1235515686.af-body.af-standards
+                .form-group
+                  label.sr-only(for='awf_field-105027451' ) Name:
+                  input#awf_field-105027451.form-control(type='text', name='name', value='', placeholder='Your name')
+                .input-group
+                  input#awf_field-105027452.form-control(type='text', name='email', value='', aria-label="Your email" aria-describedby="button-addon2", placeholder='Your email')
+                  .input-group-append
+                    input.btn.btn-primary(name='submit', type='submit', value='Submit', tabindex='502')
+                .af-element.tag(style='display:none;')
+                  input#awf_tag-105027454(type='hidden', name='tag_105027454', value='homepage')
+            div(style='display: none;')
+              img(src='https://forms.aweber.com/form/displays.htm?id=jEzMrKyMrGwcbA==', alt='')
+
+    script(
+        src='https://code.jquery.com/jquery-3.4.1.min.js'
+        integrity='sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo='
+        crossorigin='anonymous'
+    )
+    script(src='/public/js/scripts.js' type='text/javascript')

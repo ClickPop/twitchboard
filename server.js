@@ -27,7 +27,8 @@ app.use(excludeFavicon);
 
 // Root Route
 app.get('/', (req, res) => {
-    res.send('API is running.');
+    res.render('homepage');
+    //res.send('API is running.');
 });
 
 // Admin Routes

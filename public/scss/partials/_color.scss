@@ -1,0 +1,22 @@
+// Background variables
+.bg {
+  &--dark {
+    background: $darkBgColor;
+    color: $darkFontColor;
+
+    // Type Overrides
+    h1,
+    h2,
+    h3,
+    h4 {
+      &.display-1 {
+        font-weight: 900;
+        letter-spacing: .1rem;
+      }
+
+      &.display-2 {
+        font-weight: 300;
+      }
+    }
+  }
+}
