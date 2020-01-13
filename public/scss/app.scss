@@ -1,7 +1,9 @@
 @import "../../node_modules/bootstrap/scss/bootstrap",
         url('https://fonts.googleapis.com/css?family=Montserrat:400,700,900|Open+Sans:400,400i,700,700i|Press+Start+2P&display=swap'),
         'partials/variables',
-        'partials/typography';
+        'partials/typography',
+        'partials/buttons',
+        'partials/color';
 
 /** Admin Section */
 #background-opacity-slider {
@@ -32,10 +34,6 @@
         border-color: transparent;
         border-style: solid;
     }
-}
-
-.preview {
-  background: $grey00;
 }
 
 .admin-preview {

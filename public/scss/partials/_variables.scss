@@ -1,8 +1,24 @@
 // Colors
-$grey00:                        #111a21;
+$white:                         #ffffff;
+
+$greyLight:                     #eef2ff;
+$greyDark:                      #111a21;
+
+$purpleLight:                   #b283ba;
+$purpleMid:                     #7f52a0;
+
+$blueDarkest:                   #1e2433;
+$blueDark:                      #343946;
+
+$yellowMid:                     #ff9017;
+
+$primaryColor:                  $purpleMid;
+$bgColor:                       $greyLight;
+$darkBgColor:                   $blueDarkest;
 
 // Typography
-$baseFontColor:                 $grey00;
+$baseFontColor:                 $blueDarkest;
+$darkFontColor:                 $greyLight;
 $baseFontSize:                  16px;
-$fontSerif:                     'Montserrat', 'Georgia', sans-serif;
+$fontHeading:                     'Montserrat', 'Georgia', sans-serif;
 $fontSans:                      'Open Sans', 'Helvetica', arial, sans-serif;

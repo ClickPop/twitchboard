@@ -1,0 +1,11 @@
+.btn {
+  &-primary {
+    background: $purpleMid;
+    border-color: $purpleMid;
+
+    &:hover {
+      background: darken($purpleMid, 10%);
+      border-color: darken($purpleMid, 10%);
+    }
+  }
+}
