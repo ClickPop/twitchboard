@@ -9922,7 +9922,7 @@ h2 {
 }
 
 .bg--dark {
-  background: #1e2433;
+  background-image: linear-gradient(33deg, #0b0d13, #1e2433);
   color: #eef2ff;
 }
 .bg--dark h1.display-1,
@@ -9937,6 +9937,14 @@ h2 {
 .bg--dark h3.display-2,
 .bg--dark h4.display-2 {
   font-weight: 300;
+}
+
+html,
+body {
+  box-sizing: border-box;
+  height: 100%;
+  position: absolute;
+  width: 100%;
 }
 
 /** Admin Section */

@@ -1,7 +1,8 @@
 // Background variables
 .bg {
   &--dark {
-    background: $darkBgColor;
+    background-image: linear-gradient(33deg, darken($darkBgColor, 10%), $darkBgColor);
+    //background: $darkBgColor;
     color: $darkFontColor;
 
     // Type Overrides

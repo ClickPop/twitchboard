@@ -5,6 +5,14 @@
         'partials/buttons',
         'partials/color';
 
+html,
+body {
+  box-sizing: border-box;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
 /** Admin Section */
 #background-opacity-slider {
     .slider-selection {
