@@ -9,9 +9,9 @@ $(document).ready(() => {
                 referrer: $(tr)
                     .find('td:eq(0)')
                     .text(),
-                views: $(tr)
+                views: parseInt($(tr)
                     .find('td:eq(1)')
-                    .text()
+                    .text(), 10)
             };
         }
     });
@@ -24,27 +24,28 @@ window.setInterval(() => {
         })
         .then(json => {
             const newBoard = json.data.leaderboard;
-            // if (newBoard != leaderboard) {
-            for (var i = 0; i < leaderboard.length; i += 1) {
-                if (leaderboard[i] != newBoard[i]) {
-                    leaderboard[i] = newBoard[i];
-                }
-            }
 
-            $('table.leaderboard__table tr').each((row, tr) => {
-                if (row != 0) {
-                    $(tr).hide();
-                    $(tr)
-                        .find('td:eq(0)')
-                        .text(leaderboard[row - 1].referrer);
-                    $(tr)
-                        .find('td:eq(1)')
-                        .text(leaderboard[row - 1].views);
-                    setInterval(() => {
-                        $(tr).show('fast');
-                    }, 100);
+            if (JSON.stringify(leaderboard) != JSON.stringify(newBoard)) {
+                for (var i = 0; i < leaderboard.length; i += 1) {
+                    if (leaderboard[i] != newBoard[i]) {
+                        leaderboard[i] = newBoard[i];
+                    }
                 }
-            });
-            // }
+
+                $('table.leaderboard__table tr').each((row, tr) => {
+                    if (row != 0) {
+                        $(tr).hide();
+                        $(tr)
+                            .find('td:eq(0)')
+                            .text(leaderboard[row - 1].referrer);
+                        $(tr)
+                            .find('td:eq(1)')
+                            .text(leaderboard[row - 1].views);
+                        setInterval(() => {
+                            $(tr).show('fast');
+                        }, 100);
+                    }
+                });
+            }
         });
 }, 5000);
