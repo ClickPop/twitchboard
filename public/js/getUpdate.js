@@ -3,14 +3,14 @@ var leaderboard = [];
 url = `${protocol}//${hostname}:${port}/api/v1/`;
 
 $(document).ready(() => {
-    $('table.leaderboard__table tr').each((row, tr) => {
+    $('.leaderboard__row').each((row, tr) => {
         if (row != 0) {
             leaderboard[row - 1] = {
                 referrer: $(tr)
-                    .find('td:eq(0)')
+                    .find('div:eq(0)')
                     .text(),
                 views: parseInt($(tr)
-                    .find('td:eq(1)')
+                    .find('div:eq(1)')
                     .text(), 10)
             };
         }
@@ -32,14 +32,14 @@ window.setInterval(() => {
                     }
                 }
 
-                $('table.leaderboard__table tr').each((row, tr) => {
+                $('.leaderboard__row').each((row, tr) => {
                     if (row != 0) {
                         $(tr).hide();
                         $(tr)
-                            .find('td:eq(0)')
+                            .find('div:eq(0)')
                             .text(leaderboard[row - 1].referrer);
                         $(tr)
-                            .find('td:eq(1)')
+                            .find('div:eq(1)')
                             .text(leaderboard[row - 1].views);
                         setInterval(() => {
                             $(tr).show('fast');

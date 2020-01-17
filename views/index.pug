@@ -19,14 +19,14 @@ html(lang='en')
     div(class='app')
       - if (typeof(leaderboard) !== 'undefined'){
         div(class='leaderboard ' + leaderboardSettings.theme)
-          table(class='leaderboard__table')
-            tr
-              th Name
-              th Views
+          div(class='leaderboard__container')
+            div('class=leaderboard__row')
+              div Name
+              div Views
             each row in leaderboard
-              tr
-                td= row.referrer
-                td= row.views
+              div('class=leaderboard__row')
+                div= row.referrer
+                div= row.views
       -}
     script(
       src='https://code.jquery.com/jquery-3.4.1.min.js'

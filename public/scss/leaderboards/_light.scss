@@ -10,87 +10,104 @@ $bronze:                          #cd7f32;
 $borderRadius:                    6px;
 
 // Styles
-.leaderboard.light {
-  padding: 1px;
+.light {
+  .leaderboard {
+    padding: 1px;
 
-  table {
-    border-collapse: separate;
-    border-spacing: 0 0.5rem;
-    background-color: transparent;
-    color: $textColor;
+    &__container {
+      background-color: transparent;
+      color: $textColor;
 
-    .admin-preview & {
-        max-width: 80%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-  }
-
-  tr {
-    animation: FadeIn .3s ease-in-out;
-    animation-fill-mode: both;
-    box-shadow: rgba(33, 38, 45, 0.2) 0 4px 12px, rgba(33, 38, 45, 0.15) 0 8px 24px;
-
-    &:first-child {
-      animation: none;
-    }
-
-    @for $i from 2 to 11 {
-      &:nth-child(#{$i}) {
-        animation-delay: $i * 0.1s;
+      .admin-preview & {
+          max-width: 80%;
+          margin-left: auto;
+          margin-right: auto;
       }
     }
 
-    &:nth-child(2) td {
-      font-size: 1.3rem;
+    &__row {
+      animation: FadeIn .3s ease-in-out;
+      animation-fill-mode: both;
+      border-radius: $borderRadius;
+      box-shadow: rgba(33, 38, 45, 0.2) 0 4px 12px, rgba(33, 38, 45, 0.15) 0 8px 24px;
+      display: flex;
+      margin-bottom: 0.5rem;
+      width: 400px;
 
-      &:first-child::before {
-        content: '\01F947';
-        margin-right: 5px;
-      }
-      &:last-child {
-        box-shadow: inset $gold -6px 0 0 0;
-      }
-    }
+      div {
+        background: rgba($backgroundColor, 90%);
+        padding: 4px 10px;
 
-    &:nth-child(3) td {
-      font-size: 1.2rem;
+        &:first-child {
+          border-radius: $borderRadius 0 0 $borderRadius;
+          flex: 3;
+        }
 
-      &:first-child::before {
-        content: '\01F948';
-        margin-right: 5px;
+        &:last-child {
+          border-radius: 0 $borderRadius $borderRadius 0;
+          text-align: center;
+          flex: 1;
+        }
       }
-      &:last-child {
-        box-shadow: inset $silver -6px 0 0 0;
-      }
-    }
-
-    &:nth-child(4) td {
-      font-size: 1.1rem;
-
-      &:first-child::before {
-        content: '\01F949';
-        margin-right: 5px;
-      }
-      &:last-child {
-        box-shadow: inset $bronze -6px 0 0 0;
-      }
-    }
-  }
-
-  th,
-  td {
-      background: rgba($backgroundColor, 90%);
-      padding: 4px 10px;
 
       &:first-child {
-        border-radius: $borderRadius 0 0 $borderRadius;
-        width: 300px;
+        animation: none;
       }
 
-      &:last-child {
-        border-radius: 0 $borderRadius $borderRadius 0;
-        text-align: center;
+      @for $i from 2 to 11 {
+        &:nth-child(#{$i}) {
+          animation-delay: $i * 0.1s;
+        }
       }
+
+      // Medals
+      &:nth-child(2) div {
+        font-size: 1.3rem;
+
+        &:first-child::before {
+          content: '\01F947';
+          margin-right: 5px;
+        }
+        &:last-child {
+          box-shadow: inset $gold -6px 0 0 0;
+        }
+      }
+
+      &:nth-child(2) div {
+        font-size: 1.3rem;
+
+        &:first-child::before {
+          content: '\01F947';
+          margin-right: 5px;
+        }
+        &:last-child {
+          box-shadow: inset $gold -6px 0 0 0;
+        }
+      }
+
+      &:nth-child(3) div {
+        font-size: 1.2rem;
+
+        &:first-child::before {
+          content: '\01F948';
+          margin-right: 5px;
+        }
+        &:last-child {
+          box-shadow: inset $silver -6px 0 0 0;
+        }
+      }
+
+      &:nth-child(4) div {
+        font-size: 1.1rem;
+
+        &:first-child::before {
+          content: '\01F949';
+          margin-right: 5px;
+        }
+        &:last-child {
+          box-shadow: inset $bronze -6px 0 0 0;
+        }
+      }
+    }
   }
 }
