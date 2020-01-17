@@ -17,11 +17,16 @@ module.exports = function(req, res, next) {
     var channel = req.query.channel || req.params.channel;
     var { referrer, since } = req.query;
 
+    if(channel == undefined) {
+        next();
+    }
+
     channel = [...channel]
         .map(character => isLower(character))
         .toString()
         .split(',')
         .join('');
+
 
     var formula = `{channel} = "${channel}"`;
     if (referrer != undefined) {
@@ -33,25 +38,25 @@ module.exports = function(req, res, next) {
     }
 
     base('referrals')
-        .select({
-            view: 'Grid view',
-            filterByFormula: `AND(${formula})`
-        })
-        .eachPage(
-            function page(records, fetchNextPage) {
-                records.forEach(function(record) {
-                    referrals.push(record.fields);
-                });
-                fetchNextPage();
-            },
-            function done(err) {
-                if (err) {
-                    next(err);
-                }
-                res.locals.referrals = referrals;
-                req.referrals = referrals;
-                req.type = 'referrals';
-                next();
+    .select({
+        view: 'Grid view',
+        filterByFormula: `AND(${formula})`
+    })
+    .eachPage(
+        function page(records, fetchNextPage) {
+            records.forEach(function(record) {
+                referrals.push(record.fields);
+            });
+            fetchNextPage();
+        },
+        function done(err) {
+            if (err) {
+                next(err);
             }
-        );
+            res.locals.referrals = referrals;
+            req.referrals = referrals;
+            req.type = 'referrals';
+            next();
+        }
+    );
 };

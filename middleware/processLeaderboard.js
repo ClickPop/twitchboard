@@ -27,6 +27,10 @@ module.exports = function(req, res, next) {
 
     leaderboard.sort((a, b) => (a.views < b.views ? 1 : -1));
 
+    if (leaderboard.length > 10) {
+        leaderboard = leaderboard.slice(0, 9);
+    }
+
     res.locals.leaderboard = leaderboard;
     req.leaderboard = leaderboard;
     next();
