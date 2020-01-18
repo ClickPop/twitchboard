@@ -5,11 +5,11 @@ var session = require('express-session');
 var passport = require('passport');
 require('dotenv').config();
 
-const excludeFavicon = require('./middleware/exludeFavicon');
+const { excludeFavicon } = require('./middleware/middleware');
 
 function errorHandler(err, req, res, next) {
-	console.error(err.stack);
-	res.status(500).send('Something broke!');
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
 }
 
 app.set('views', './views');
@@ -19,18 +19,18 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use(excludeFavicon);
 
 app.use(
-	session({
-		secret: process.env.SESSION_SECRET,
-		resave: false,
-		saveUninitialized: false
-	})
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false
+    })
 );
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Root Route
 app.get('/', (req, res) => {
-	res.render('homepage');
+    res.render('homepage');
 });
 
 app.use('/admin', require('./routes/admin'));
