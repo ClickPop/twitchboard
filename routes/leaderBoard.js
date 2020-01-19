@@ -6,6 +6,7 @@ var router = express.Router();
 // const getReferrals = require('../middleware/getReferrals');
 
 const {
+    auth,
     processLeaderboard,
     getLeaderboardSettings,
     getReferrals
@@ -13,6 +14,7 @@ const {
 
 router.get(
     '/:channel',
+    auth,
     getLeaderboardSettings,
     getReferrals,
     processLeaderboard,

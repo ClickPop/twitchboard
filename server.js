@@ -1,8 +1,8 @@
 const path = require('path');
 const express = require('express');
 const app = express();
-var session = require('express-session');
-var passport = require('passport');
+const cookieSession = require('cookie-session');
+const passport = require('passport');
 require('dotenv').config();
 
 const { excludeFavicon } = require('./middleware/middleware');
@@ -19,12 +19,13 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use(excludeFavicon);
 
 app.use(
-    session({
-        secret: process.env.SESSION_SECRET,
-        resave: false,
-        saveUninitialized: false
+    cookieSession({
+        maxAge: 24 * 60 * 60 * 1000,
+        keys: [process.env.SESSION_SECRET]
     })
 );
+
+
 app.use(passport.initialize());
 app.use(passport.session());
 

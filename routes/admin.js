@@ -8,6 +8,7 @@ var router = express.Router();
 // const getReferrals = require('../middleware/getReferrals');
 
 const {
+    auth,
     processLeaderboard,
     setTheme,
     resetLeaderboard,
@@ -17,6 +18,7 @@ const {
 
 router.get(
     '/:channel',
+    auth,
     getLeaderboardSettings,
     getReferrals,
     processLeaderboard,
@@ -26,8 +28,8 @@ router.get(
 );
 router.get('/:channel/reset', getLeaderboardSettings, resetLeaderboard);
 router.post('/:channel/set-theme/:theme', getLeaderboardSettings, setTheme);
-router.get('/', (req, res) => {
-    res.send('Thou shalt not pass!');
-});
+// router.get('/', (req, res) => {
+    
+// });
 
 module.exports = router;

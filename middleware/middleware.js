@@ -7,8 +7,10 @@ const getReferrals = require('./getReferrals');
 const useReferral = require('./useReferral');
 const requestIP = require('./requestIP');
 const buildJSON = require('./buildJSON');
+const auth = require('./auth');
 
 module.exports = {
+    auth,
     excludeFavicon,
     processLeaderboard,
     setTheme,
