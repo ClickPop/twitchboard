@@ -11,8 +11,10 @@ $borderRadius:                    6px;
 
 // Styles
 .light {
+  font-size: 20px;
+  padding: 30px;
+
   .leaderboard {
-    padding: 1px;
 
     &__container {
       background-color: transparent;
@@ -32,7 +34,7 @@ $borderRadius:                    6px;
       box-shadow: rgba(33, 38, 45, 0.2) 0 4px 12px, rgba(33, 38, 45, 0.15) 0 8px 24px;
       display: flex;
       margin-bottom: 0.5rem;
-      width: 400px;
+      width: 600px;
 
       div {
         background: rgba($backgroundColor, 90%);

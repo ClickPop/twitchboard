@@ -36,7 +36,6 @@ html(lang='en')
                     select(class='form-control theme-select text-primary' name='theme' data-channel=channel)
                         option(value='light' selected= leaderboardSettings.theme === 'light') light
                         option(value='dark' selected= leaderboardSettings.theme === 'dark') dark
-                        option(value='retro' selected= leaderboardSettings.theme === 'retro') retro
                 //-
                     td
                       input(
@@ -59,14 +58,14 @@ html(lang='en')
             div(class='container' data-current-theme=leaderboardSettings.theme)
                 - if (typeof(leaderboard) !== 'undefined'){
                     div(class='leaderboard ' + leaderboardSettings.theme)
-                        table
-                            tr
-                                th Name
-                                th Views
+                        div(class='leaderboard__container')
+                            div('class=leaderboard__row')
+                                div Name
+                                div Views
                             each row in leaderboard
-                                tr
-                                    td= row.referrer
-                                    td= row.views
+                                div('class=leaderboard__row')
+                                    div= row.referrer
+                                    div= row.views
                 -}
 
     script(
